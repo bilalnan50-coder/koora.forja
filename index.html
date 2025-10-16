@@ -1,1 +1,77 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>koora.forja — المباريات و القنوات</title>
+  <meta name="description" content="koora.forja - مواعيد المباريات و القنوات الناقلة. عربي / English." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #0b0b0b; color: #f4f4f4; }
+    .gold { color: #D4AF37; }
+    .card { background:#111; border:1px solid rgba(212,175,55,0.07); }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <header class="flex items-center justify-between mb-4">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded bg-black flex items-center justify-center border border-yellow-600">
+        <div class="text-yellow-400 font-bold">🤖📺⚽</div>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold gold">koora.forja</h1>
+        <p class="text-xs opacity-70">مواعيد المباريات و القنوات الناقلة</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="langBtn" class="px-3 py-1 border rounded text-sm">EN</button>
+    </div>
+  </header>
 
+  <div id="days" class="flex gap-2 overflow-x-auto mb-4"></div>
+
+  <section class="mb-4">
+    <h2 class="font-semibold mb-2 gold">البطولات القارية</h2>
+    <div class="grid grid-cols-2 gap-2">
+      <div class="card p-3 rounded">دوري الأبطال</div>
+      <div class="card p-3 rounded">الدوري الأوروبي</div>
+      <div class="card p-3 rounded">كأس العالم للأندية</div>
+      <div class="card p-3 rounded">كأس إفريقيا</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-semibold mb-2 gold" id="matchesTitle">مباريات اليوم</h2>
+    <div id="matches" class="space-y-2"></div>
+  </section>
+
+  <footer class="mt-6 text-xs opacity-60">Koora.forja — بدون بث مباشر</footer>
+
+<script>
+const API_BASE = 'https://example.com/api'; // غادي نبدلوه من بعد
+
+let lang = 'ar';
+const daysAr = ['السبت','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة'];
+
+function setLang(l){ 
+  lang = l; 
+  document.getElementById('langBtn').innerText = (lang==='ar')?'EN':'ع';
+  renderDays();
+}
+document.getElementById('langBtn').addEventListener('click', ()=> setLang(lang==='ar'?'en':'ar'));
+
+function renderDays(){
+  const el = document.getElementById('days');
+  el.innerHTML = '';
+  for(let i=0;i<7;i++){
+    const btn = document.createElement('button');
+    btn.className = 'px-3 py-2 card rounded text-sm whitespace-nowrap';
+    btn.innerText = daysAr[i];
+    btn.onclick = ()=> alert('المباريات ديال: '+daysAr[i]);
+    el.appendChild(btn);
+  }
+}
+renderDays();
+</script>
+</body>
+</html>
